@@ -1,3 +1,4 @@
+import java.util.*;
 class Contacts{
     String firstName = "Go";
     String lastName = "Digit";
@@ -10,6 +11,9 @@ class Contacts{
 }
 public class AddressBook {
     public static void main(String[] args) {
-        System.out.println("Welcome to Address Book");
+        System.out.println("Welcome to Address Book enter the person contact name:");
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+
         }
     }
