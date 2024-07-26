@@ -80,36 +80,22 @@ public class AddressBook {
     public static void main(String[] args) {
         AddressBook addressBook = new AddressBook();
 
-        // Create a new contact
-        Contacts newContact = new Contacts(
-                "John",
-                "Doe",
-                "123 Main St",
-                "Anytown",
-                "California",
-                "john.doe@example.com",
-                12345,
-                1234567890
-        );
-        addressBook.addContact(newContact);
+        // Create and add multiple contacts
+        Contacts contact1 = new Contacts("John", "Doe", "123 Main St", "Anytown", "California", "john.doe@example.com", 12345, 1234567890);
+        Contacts contact2 = new Contacts("Alice", "Smith", "456 Elm St", "Newtown", "California", "alice.smith@example.com", 54321, 116543210);
+        addressBook.addContact(contact1);
+        addressBook.addContact(contact2);
+
+        // Display contacts
         addressBook.displayContacts();
 
         // Edit an existing contact
-        Contacts updatedContact = new Contacts(
-                "John",
-                "Doe",
-                "456 Elm St",
-                "Newtown",
-                "California",
-                "john.doe@example.com",
-                54321,
-                111111
-        );
+        Contacts updatedContact = new Contacts("John", "Doe", "789 Oak St", "Othercity", "California", "john.doe@example.com", 98765, 987654321);
         addressBook.editContact("John", "Doe", updatedContact);
         addressBook.displayContacts();
 
         // Delete a contact
-        addressBook.deleteContact("John", "Doe");
+        addressBook.deleteContact("Alice", "Smith");
         addressBook.displayContacts();
     }
 }
