@@ -1,45 +1,69 @@
-import java.util.Scanner;
-
 class Contacts {
-    String firstName = "Go";
-    String lastName = "Digit";
-    String address = "visakhapatnam";
-    String city = "hyderabad";
-    String state = "AndhraPradesh";
-    String email = "sathwika@gmail.com";
-    int pincode = 530027;
-    int number = 00000000;
+    String firstName;
+    String lastName;
+    String address;
+    String city;
+    String state;
+    String email;
+    int pincode;
+    int number;
 
-    public void updateContactInfo(String newAddress, String newCity, String newState, String newEmail) {
-        this.address = newAddress;
-        this.city = newCity;
-        this.state = newState;
-        this.email = newEmail;
+    public Contacts(String first_name, String last_name, String address, String city, String state, String email, int pincode, int number) {
+        this.firstName = first_name;
+        this.lastName = last_name;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.email = email;
+        this.pincode = pincode;
+        this.number = number;
     }
 }
 
 public class AddressBook {
-    public static void main(String[] args) {
-        Contacts contact = new Contacts();
+    private Contacts[] contacts;
+    private int numContacts;
 
-        System.out.println("Welcome to Address Book! Enter the person's contact name:");
-        Scanner sc = new Scanner(System.in);
-        String contactName = sc.nextLine();
+    public AddressBook() {
+        this.contacts = new Contacts[100]; // Adjust the size as needed
+        this.numContacts = 0;
+    }
 
-        if (contact.firstName.equalsIgnoreCase(contactName)) {
-            System.out.print("Enter new address: ");
-            String newAddress = sc.nextLine();
-            System.out.print("Enter new city: ");
-            String newCity = sc.nextLine();
-            System.out.print("Enter new state: ");
-            String newState = sc.nextLine();
-            System.out.print("Enter new email: ");
-            String newEmail = sc.nextLine();
-
-            contact.updateContactInfo(newAddress, newCity, newState, newEmail);
-            System.out.println("Contact updated successfully!");
+    public void addContact(Contacts contact) {
+        if (numContacts < contacts.length) {
+            contacts[numContacts] = contact;
+            numContacts++;
         } else {
-            System.out.println("Contact not found. Please check the name.");
+            System.out.println("Address book is full. Cannot add more contacts.");
         }
+    }
+
+    public void displayContacts() {
+        for (int i = 0; i < numContacts; i++) {
+            Contacts contact = contacts[i];
+            System.out.println("Name: " + contact.firstName + " " + contact.lastName);
+            System.out.println("Address: " + contact.address + ", " + contact.city + ", " + contact.state + " - " + contact.pincode);
+            System.out.println("Email: " + contact.email);
+            System.out.println("Phone Number: " + contact.number);
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        AddressBook addressBook = new AddressBook();
+
+        // Create a new contact
+        Contacts newContact = new Contacts(
+                "John",
+                "Doe",
+                "123 Main St",
+                "Anytown",
+                "California",
+                "john.doe@example.com",
+                12345,
+                1234567890
+        );
+        addressBook.addContact(newContact);
+        addressBook.displayContacts();
     }
 }
