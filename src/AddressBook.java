@@ -61,6 +61,22 @@ public class AddressBook {
         System.out.println("Contact for " + first_name + " " + last_name + " not found.");
     }
 
+    public void deleteContact(String first_name, String last_name) {
+        for (int i = 0; i < numContacts; i++) {
+            Contacts contact = contacts[i];
+            if (contact.firstName.equals(first_name) && contact.lastName.equals(last_name)) {
+                // Shift remaining contacts to fill the gap
+                for (int j = i; j < numContacts - 1; j++) {
+                    contacts[j] = contacts[j + 1];
+                }
+                numContacts--;
+                System.out.println("Contact for " + first_name + " " + last_name + " has been deleted.");
+                return;
+            }
+        }
+        System.out.println("Contact for " + first_name + " " + last_name + " not found.");
+    }
+
     public static void main(String[] args) {
         AddressBook addressBook = new AddressBook();
 
@@ -87,9 +103,13 @@ public class AddressBook {
                 "California",
                 "john.doe@example.com",
                 54321,
-                1111111111
+                111111
         );
         addressBook.editContact("John", "Doe", updatedContact);
+        addressBook.displayContacts();
+
+        // Delete a contact
+        addressBook.deleteContact("John", "Doe");
         addressBook.displayContacts();
     }
 }
